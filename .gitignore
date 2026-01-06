@@ -1,0 +1,40 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/bin/
+/pkg/
+
+# Test output and coverage
+*.test
+coverage.out
+
+# Vendor
+/vendor/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs_vista.db
+
+# Environment
+.env
+
+# Logs
+*.log
+
+# Build artifacts
+build/
+*.o
+
+# Misc
+.node_modules/
