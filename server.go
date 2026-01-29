@@ -527,8 +527,15 @@ func (s *SecureServer) handleJoinRoom(session *ClientSession, msg *Message) {
 		return
 	}
 
-	// Add user to room
+	// Remove user from previous room if they were in one
 	s.clientsMutex.Lock()
+	if session.currentRoom != "" {
+		oldRoom := session.currentRoom
+		delete(s.rooms[oldRoom], session.username)
+		fmt.Printf("[ROOM] User '%s' left '%s' (automatic when joining '%s')\n", session.username, oldRoom, room)
+	}
+	
+	// Add user to new room
 	s.rooms[room][session.username] = session
 	s.clientsMutex.Unlock()
 

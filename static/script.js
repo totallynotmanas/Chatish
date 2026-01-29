@@ -90,17 +90,23 @@
                 loginStatus.classList.add('error');
             }
         } else if (msg.type === 'chat') {
-            const el = document.createElement('div');
-            el.className = 'msg';
-            el.innerHTML = `<span class="msg-user">${msg.username}:</span> <span class="msg-content">${escapeHtml(msg.content)}</span>`;
-            messages.appendChild(el);
-            messages.scrollTop = messages.scrollHeight;
+            // Only display chat messages from the current room
+            if (msg.room === currentRoom) {
+                const el = document.createElement('div');
+                el.className = 'msg';
+                el.innerHTML = `<span class="msg-user">${msg.username}:</span> <span class="msg-content">${escapeHtml(msg.content)}</span>`;
+                messages.appendChild(el);
+                messages.scrollTop = messages.scrollHeight;
+            }
         } else if (msg.type === 'system') {
-            const el = document.createElement('div');
-            el.className = 'msg-system';
-            el.textContent = '✓ ' + msg.content;
-            messages.appendChild(el);
-            messages.scrollTop = messages.scrollHeight;
+            // Only display system messages from the current room
+            if (msg.room === currentRoom) {
+                const el = document.createElement('div');
+                el.className = 'msg-system';
+                el.textContent = '✓ ' + msg.content;
+                messages.appendChild(el);
+                messages.scrollTop = messages.scrollHeight;
+            }
         } else if (msg.type === 'join_success') {
             currentRoom = msg.room;
             currentRoomTitle.textContent = '# ' + msg.room;
